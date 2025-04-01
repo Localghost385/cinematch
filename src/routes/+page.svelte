@@ -1,54 +1,29 @@
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
-	import { enhance } from '$app/forms'
-	import type { ActionData, SubmitFunction } from './$types.js'
-
-	export let form: ActionData;
-
-	let loading = false
-
-	const handleSubmit: SubmitFunction = () => {
-		loading = true
-		return async ({ update }) => {
-			update()
-			loading = false
-		}
-	}
+	import { Button } from '$lib/components/ui/button';
 </script>
 
 <svelte:head>
-	<title>User Management</title>
+	<title>Cinematch</title>
 </svelte:head>
 
-<form class="row flex flex-center" method="POST" use:enhance={handleSubmit}>
-	<div class="col-6 form-widget">
-		<h1 class="header">Supabase + SvelteKit</h1>
-		<p class="description">Sign in via magic link with your email below</p>
-		{#if form?.message !== undefined}
-		<div class="success {form?.success ? '' : 'fail'}">
-			{form?.message}
-		</div>
-		{/if}
-		<div>
-			<label for="email">Email address</label>
-			<input
-				id="email"
-				name="email"
-				class="inputField"
-				type="email"
-				placeholder="Your email"
-				value={form?.email ?? ''}
-			/>
-		</div>
-		{#if form?.errors?.email}
-		<span class="flex items-center text-sm error">
-			{form?.errors?.email}
-		</span>
-		{/if}
-		<div>
-			<button class="button primary block">
-				{ loading ? 'Loading' : 'Send magic link' }
-			</button>
+<div class="flex h-[calc(100vh-64px)] flex-col justify-evenly bg-[url('/src/lib/images/wiggle_light.svg')] dark:bg-[url('/src/lib/images/wiggle_dark.svg')] bg-cover bg-center bg-no-repeat ">
+	<div
+		class="w-full lg:grid lg:min-h-[calc(100vh-64px)] lg:grid-cols-2 xl:min-h-[calc(100vh-64px)]"
+	>
+		<div class="flex items-center justify-center py-12">
+			<div class="mx-auto grid w-[500px] gap-6">
+				<div class="grid gap-2 text-left">
+					<h1 class="w-[350px] text-3xl font-bold">Discover Your new favorite movies.</h1>
+					<p class="text-muted-foreground text-balance">
+						Log in or sign up to get personalized movie recommendations, track what you've watched,
+						and discover your next favorite film.
+					</p>
+					<div class="my-2">
+						<Button variant="outline" href="/login">Get Started Now</Button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</form>
+</div>
