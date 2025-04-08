@@ -40,6 +40,7 @@ export const actions: Actions = {
 		});
 
 		if (error) {
+			console.log(error);
 			return fail(400, {
 				success: false,
 				email,
